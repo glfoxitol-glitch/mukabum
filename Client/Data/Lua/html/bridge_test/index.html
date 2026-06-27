@@ -1,0 +1,278 @@
+<!doctype html>
+<html>
+<head>
+	<meta charset="utf-8">
+	<title>Generic HTML Bridge</title>
+	<style>
+		html, body {
+			margin: 0;
+			width: 100%;
+			height: 100%;
+			background: transparent;
+			color: #f4f7fb;
+			font-family: Arial, Helvetica, sans-serif;
+			overflow: hidden;
+		}
+
+		.shell {
+			position: absolute;
+			left: 0;
+			top: 0;
+			right: 0;
+			bottom: 0;
+			padding: 18px;
+			background: rgba(6, 10, 14, 0.78);
+			border: 1px solid rgba(152, 188, 205, 0.22);
+		}
+
+		.header {
+			display: flex;
+			align-items: center;
+			justify-content: space-between;
+			height: 42px;
+			border-bottom: 1px solid rgba(255, 255, 255, 0.12);
+		}
+
+		h1 {
+			margin: 0;
+			font-family: Georgia, "Times New Roman", serif;
+			font-size: 26px;
+			font-weight: 700;
+			letter-spacing: 0;
+			text-transform: uppercase;
+		}
+
+		button {
+			height: 28px;
+			padding: 0 14px;
+			border: 1px solid rgba(114, 255, 24, 0.72);
+			background: rgba(64, 181, 0, 0.75);
+			color: white;
+			font-weight: 700;
+		}
+
+		.meta {
+			display: flex;
+			gap: 10px;
+			margin: 14px 0;
+		}
+
+		.pill {
+			padding: 8px 12px;
+			background: rgba(255, 255, 255, 0.06);
+			border: 1px solid rgba(255, 255, 255, 0.08);
+			color: #c8d3dd;
+		}
+
+		.table {
+			height: 270px;
+			overflow-y: auto;
+			background: rgba(3, 7, 10, 0.34);
+			border: 1px solid rgba(255, 255, 255, 0.08);
+		}
+
+		.row {
+			display: grid;
+			grid-template-columns: 54px 1fr 160px 92px;
+			align-items: center;
+			min-height: 34px;
+			padding: 0 12px;
+			border-bottom: 1px solid rgba(255, 255, 255, 0.07);
+		}
+
+		.row.header-row {
+			min-height: 30px;
+			color: #e6d98a;
+			font-size: 12px;
+			font-weight: 700;
+			text-transform: uppercase;
+			background: rgba(255, 255, 255, 0.05);
+		}
+
+		.row:not(.header-row):hover {
+			background: rgba(79, 255, 16, 0.13);
+		}
+
+		.rank {
+			color: #ffe16c;
+			font-weight: 700;
+		}
+
+		.name {
+			font-weight: 700;
+		}
+
+		.score {
+			color: #6cff1b;
+			font-weight: 800;
+			text-align: right;
+		}
+
+		.status {
+			margin-top: 12px;
+			color: #7cff19;
+			font-size: 12px;
+		}
+	</style>
+</head>
+<body>
+	<div class="shell">
+		<div class="header">
+			<h1 id="title">Generic HTML Bridge</h1>
+			<button id="btn-refresh">Refresh</button>
+		</div>
+
+		<div class="meta">
+			<div class="pill" id="window-id">window: pending</div>
+			<div class="pill" id="provider">provider: none</div>
+			<div class="pill" id="reason">reason: none</div>
+		</div>
+
+		<div class="table" id="bridge-body">
+			<div class="row header-row">
+				<div>Rank</div>
+				<div>Name</div>
+				<div>Class</div>
+				<div class="score">Score</div>
+			</div>
+		</div>
+
+		<div class="status" id="status">Waiting for Lua...</div>
+	</div>
+
+	<script>
+		(function () {
+			var state = {
+				windowId: "html_bridge_test",
+				config: null,
+				bound: {}
+			};
+
+			function text(value) {
+				return value === undefined || value === null ? "" : String(value);
+			}
+
+			function setText(selector, value) {
+				var element = document.querySelector(selector);
+				if (element) element.textContent = text(value);
+			}
+
+			function emit(eventName, payload) {
+				if (!eventName || !globalThis.htmluiRequest) return false;
+				return !!globalThis.htmluiRequest(eventName, {
+					windowId: state.windowId,
+					payload: payload || {}
+				});
+			}
+
+			function splitEventKey(key) {
+				var index = key.lastIndexOf(":");
+				if (index < 0) return { selector: key, type: "click" };
+				return {
+					selector: key.substring(0, index),
+					type: key.substring(index + 1)
+				};
+			}
+
+			function bindConfiguredEvents(events) {
+				events = events || {};
+				for (var key in events) {
+					if (!events.hasOwnProperty(key) || state.bound[key]) continue;
+					var parts = splitEventKey(key);
+					var element = document.querySelector(parts.selector);
+					var eventName = events[key];
+					if (!element || !eventName) continue;
+					state.bound[key] = true;
+					element.addEventListener(parts.type, function (name, selector, type) {
+						return function (evt) {
+							var target = evt.target || {};
+							emit(name, {
+								selector: selector,
+								type: type,
+								tag: target.tagName || "",
+								text: target.textContent || ""
+							});
+						};
+					}(eventName, parts.selector, parts.type));
+				}
+			}
+
+			function renderRows(rows) {
+				var body = document.querySelector("#bridge-body");
+				if (!body) return;
+				body.innerHTML =
+					'<div class="row header-row">' +
+					'<div>Rank</div><div>Name</div><div>Class</div><div class="score">Score</div>' +
+					'</div>';
+				rows = rows || [];
+				for (var index = 0; index < rows.length; index++) {
+					var row = rows[index] || {};
+					var item = document.createElement("div");
+					item.className = "row";
+					item.setAttribute("data-rank", text(row.rank));
+					item.innerHTML =
+						'<div class="rank">' + text(row.rank) + '</div>' +
+						'<div class="name">' + text(row.name) + '</div>' +
+						'<div>' + text(row.class) + '</div>' +
+						'<div class="score">' + text(row.score) + '</div>';
+					body.appendChild(item);
+				}
+			}
+
+			function receiveMessage(message) {
+				if (!message) return;
+				if (message.windowId && message.windowId !== state.windowId) return;
+
+				if (message.action === "setText") {
+					var payload = message.payload || {};
+					setText(message.target || "#status", payload.text || payload.value || "");
+					return;
+				}
+
+				if (message.action === "setData") {
+					var data = message.payload || {};
+					setText("#title", data.title || "Generic HTML Bridge");
+					setText("#reason", "reason: " + text(data.reason || "data"));
+					renderRows(data.rows || []);
+					setText("#status", "Lua sent " + (data.rows ? data.rows.length : 0) + " rows");
+				}
+			}
+
+			globalThis.htmluiReceive = function (eventName, payload) {
+				if (eventName === "sfui:config") {
+					state.config = payload || {};
+					state.windowId = state.config.windowId || state.windowId;
+					setText("#window-id", "window: " + state.windowId);
+					if (state.config.data) {
+						setText("#provider", "provider: " + text(state.config.data.provider || "custom"));
+					}
+					bindConfiguredEvents(state.config.events || {});
+					return true;
+				}
+
+				if (eventName === "sfui:message") {
+					receiveMessage(payload || {});
+					return true;
+				}
+
+				if (eventName === "sfui:open") {
+					if (payload && payload.windowId) state.windowId = payload.windowId;
+					return true;
+				}
+
+				if (eventName === "sfui:close") return true;
+				return false;
+			};
+
+			globalThis.sfui = {
+				emit: emit,
+				receive: receiveMessage
+			};
+
+			setTimeout(function () {
+				emit("HtmlBridge.Ready", { source: "bridge_test" });
+			}, 1);
+		})();
+	</script>
+</body>
+</html>

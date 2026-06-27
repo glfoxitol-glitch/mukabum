@@ -1,0 +1,350 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="utf-8" />
+	<title>Market de Items</title>
+	<style>
+		html, body {
+			margin: 0;
+			width: 100%;
+			height: 100%;
+			background: transparent;
+			font-family: "Segoe UI", Arial, sans-serif;
+			color: #f4f6fb;
+		}
+
+		body {
+			flow: vertical;
+			horizontal-align: center;
+		}
+
+		.market-shell {
+			width: 100%;
+			height: 100%;
+			background: rgba(0, 0, 0, 0.28);
+		}
+
+		.market-title {
+			margin-top: 34dip;
+			font-family: Georgia, "Times New Roman", serif;
+			font-size: 34dip;
+			text-align: center;
+			letter-spacing: 0;
+			color: #ffffff;
+			text-shadow: 0 2dip 8dip rgba(0, 0, 0, 0.85);
+		}
+
+		.title-rule {
+			width: 510dip;
+			height: 1dip;
+			margin: 11dip * 28dip;
+			background: linear-gradient(to right, transparent, rgba(255,255,255,0.42), transparent);
+		}
+
+		.market-content {
+			width: 100%;
+			flow: horizontal;
+			horizontal-align: center;
+			vertical-align: middle;
+			border-spacing: 34dip;
+		}
+
+		.nav-button {
+			width: 58dip;
+			height: 90dip;
+			flow: vertical;
+			horizontal-align: center;
+			vertical-align: middle;
+			color: rgba(255, 255, 255, 0.86);
+			font-size: 56dip;
+			font-weight: bold;
+			text-shadow: 0 2dip 8dip rgba(0, 0, 0, 0.85);
+		}
+
+		.nav-button:hover {
+			color: #ffffff;
+			transform: scale(1.08);
+		}
+
+		.item-strip {
+			flow: horizontal;
+			horizontal-align: center;
+			vertical-align: middle;
+			border-spacing: 22dip;
+		}
+
+		.item-card {
+			width: 250dip;
+			height: 292dip;
+			background: rgba(7, 12, 17, 0.82);
+			border: 1dip solid rgba(112, 255, 34, 0.09);
+			box-shadow: 0 14dip 42dip rgba(0, 0, 0, 0.42);
+		}
+
+		.item-card:hover {
+			background: rgba(9, 15, 21, 0.9);
+			border-color: rgba(112, 255, 34, 0.28);
+		}
+
+		.item-card.featured {
+			width: 335dip;
+			height: 392dip;
+			background: rgba(7, 12, 17, 0.9);
+			border-color: rgba(112, 255, 34, 0.18);
+			box-shadow: 0 18dip 64dip rgba(0, 0, 0, 0.55);
+		}
+
+		.seller {
+			flow: horizontal;
+			padding: 14dip 16dip 0;
+			border-spacing: 9dip;
+			vertical-align: middle;
+		}
+
+		.featured .seller {
+			padding: 18dip 18dip 0;
+		}
+
+		.avatar {
+			width: 34dip;
+			height: 34dip;
+			border-radius: 50%;
+			background: radial-gradient(circle at 34% 24%, #fff7f2, #d6b6ad 37%, #351318 66%, #050508);
+			border: 1dip solid rgba(255, 255, 255, 0.5);
+		}
+
+		.featured .avatar {
+			width: 42dip;
+			height: 42dip;
+		}
+
+		.seller-name {
+			font-size: 14dip;
+			font-weight: bold;
+			color: #d9dee8;
+		}
+
+		.featured .seller-name {
+			font-size: 18dip;
+		}
+
+		.seller-subtitle {
+			font-size: 11dip;
+			color: #8d95a5;
+		}
+
+		.featured .seller-subtitle {
+			font-size: 13dip;
+		}
+
+		.more {
+			margin-left: *;
+			font-size: 28dip;
+			color: #b1b8c4;
+			line-height: 1;
+		}
+
+		.item-visual {
+			height: 132dip;
+			flow: vertical;
+			horizontal-align: center;
+			vertical-align: middle;
+		}
+
+		.featured .item-visual {
+			height: 178dip;
+		}
+
+		.weapon {
+			width: 78dip;
+			height: 112dip;
+			background:
+				radial-gradient(circle at 50% 23%, #bafaff, #17c6ec 10%, #055a72 20%, transparent 27%),
+				linear-gradient(135deg, transparent 22%, #edf5ff 24%, #7c8fa3 35%, transparent 37%),
+				linear-gradient(45deg, transparent 20%, #edf5ff 22%, #7c8fa3 34%, transparent 37%),
+				linear-gradient(to bottom, transparent 38%, #b77639 39%, #e0ad66 66%, #5e3018 68%, transparent 84%);
+			filter: drop-shadow(0 7dip 12dip rgba(0,0,0,0.55));
+		}
+
+		.featured .weapon {
+			width: 98dip;
+			height: 146dip;
+		}
+
+		.item-row {
+			flow: horizontal;
+			padding: 0 18dip;
+			vertical-align: middle;
+		}
+
+		.item-name {
+			font-size: 22dip;
+			font-weight: bold;
+			color: #b9c0cf;
+			line-height: 1.05;
+		}
+
+		.featured .item-name {
+			font-size: 30dip;
+		}
+
+		.add-button {
+			margin-left: *;
+			width: 24dip;
+			height: 24dip;
+			flow: vertical;
+			horizontal-align: center;
+			vertical-align: middle;
+			background: #63c900;
+			color: #ffffff;
+			font-size: 20dip;
+			font-weight: bold;
+		}
+
+		.featured .add-button {
+			width: 30dip;
+			height: 30dip;
+			font-size: 24dip;
+		}
+
+		.add-button:hover {
+			background: #7cff00;
+		}
+
+		.buy-button {
+			width: 100%;
+			height: 55dip;
+			margin-top: 12dip;
+			flow: horizontal;
+			horizontal-align: center;
+			vertical-align: middle;
+			border-spacing: 9dip;
+			background: linear-gradient(#79f900, #4fbd00);
+			color: #ffffff;
+			font-size: 19dip;
+			font-weight: bold;
+			text-shadow: 0 1dip 2dip rgba(0, 0, 0, 0.55);
+		}
+
+		.featured .buy-button {
+			height: 68dip;
+			font-size: 25dip;
+		}
+
+		.buy-button:hover {
+			background: linear-gradient(#9dff28, #61d400);
+		}
+
+		.cart {
+			font-size: 27dip;
+		}
+
+		.featured .cart {
+			font-size: 36dip;
+		}
+
+		.footer-status {
+			margin-top: 20dip;
+			text-align: center;
+			font-size: 12dip;
+			color: #7dff00;
+			text-shadow: 0 1dip 5dip rgba(0, 0, 0, 0.85);
+		}
+	</style>
+	<script type="module">
+		document.on("click", ".buy-button", function() {
+			const status = document.$("#market-status");
+			status.textContent = "Oferta seleccionada: Flame bergue";
+		});
+
+		document.on("click", ".add-button", function() {
+			const status = document.$("#market-status");
+			status.textContent = "Item agregado a revision.";
+		});
+	</script>
+</head>
+<body>
+	<section class="market-shell">
+		<header class="market-title">MARKET DE ITEMS</header>
+		<div class="title-rule"></div>
+
+		<div class="market-content">
+			<div class="nav-button" data-dir="left">&lsaquo;</div>
+
+			<div class="item-strip">
+				<div class="item-card">
+					<div class="seller">
+						<div class="avatar"></div>
+						<div>
+							<div class="seller-name">Mayconpsd</div>
+							<div class="seller-subtitle">Item offer</div>
+						</div>
+						<div class="more">&#8942;</div>
+					</div>
+					<div class="item-visual"><div class="weapon"></div></div>
+					<div class="item-row">
+						<div class="item-name">Flame bergue</div>
+						<div class="add-button">+</div>
+					</div>
+					<div class="buy-button"><span class="cart">&#128722;</span><span>1,500 WCoinC</span></div>
+				</div>
+
+				<div class="item-card featured">
+					<div class="seller">
+						<div class="avatar"></div>
+						<div>
+							<div class="seller-name">Mayconpsd</div>
+							<div class="seller-subtitle">Item offer</div>
+						</div>
+						<div class="more">&#8942;</div>
+					</div>
+					<div class="item-visual"><div class="weapon"></div></div>
+					<div class="item-row">
+						<div class="item-name">Flame bergue</div>
+						<div class="add-button">+</div>
+					</div>
+					<div class="buy-button"><span class="cart">&#128722;</span><span>1,500 WCoinC</span></div>
+				</div>
+
+				<div class="item-card">
+					<div class="seller">
+						<div class="avatar"></div>
+						<div>
+							<div class="seller-name">Mayconpsd</div>
+							<div class="seller-subtitle">Item offer</div>
+						</div>
+						<div class="more">&#8942;</div>
+					</div>
+					<div class="item-visual"><div class="weapon"></div></div>
+					<div class="item-row">
+						<div class="item-name">Flame bergue</div>
+						<div class="add-button">+</div>
+					</div>
+					<div class="buy-button"><span class="cart">&#128722;</span><span>1,500 WCoinC</span></div>
+				</div>
+
+				<div class="item-card">
+					<div class="seller">
+						<div class="avatar"></div>
+						<div>
+							<div class="seller-name">Mayconpsd</div>
+							<div class="seller-subtitle">Item offer</div>
+						</div>
+						<div class="more">&#8942;</div>
+					</div>
+					<div class="item-visual"><div class="weapon"></div></div>
+					<div class="item-row">
+						<div class="item-name">Flame bergue</div>
+						<div class="add-button">+</div>
+					</div>
+					<div class="buy-button"><span class="cart">&#128722;</span><span>1,500 WCoinC</span></div>
+				</div>
+			</div>
+
+			<div class="nav-button" data-dir="right">&rsaquo;</div>
+		</div>
+
+		<div class="footer-status" id="market-status">Market experimental cargado desde Data\SciterUI\Market.</div>
+	</section>
+</body>
+</html>

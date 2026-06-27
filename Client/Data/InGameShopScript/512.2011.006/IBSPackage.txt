@@ -1,0 +1,85 @@
+31@1@128@VIP@170@1900@@@182@184@0@0@177@1@Coins@Coins@181@200@0@1280|@6780@2@3@1280|1281|1282|@0@509@669
+31@3@121@Talisman of Luck@170@990@Increases chance of success for combinations (+10%)@@182@184@0@0@177@1@Coins@Coins@181@200@0@1210|@7221@2@1@1210|@0@509@669
+31@4@130@Gold Key@170@990@Open Golden Box with a Jewel of Chaos#Check drop on the web/discord#Get Sealed Golden Box hunting in Vulcanus#Also available free at the Air Drop event@@182@184@0@0@177@1@Coins@Coins@181@200@0@1300|@7281@2@1@1300|@0@509@669
+31@5@129@Silver Key@170@490@Open Golden Box with a Jewel of Chaos#Check drop on the web/discord#Get Sealed Silver Box hunting in Vulcanus #Also available free at the Air Drop event@@182@184@0@0@177@1@Coins@Coins@181@200@0@1290|@7280@2@1@1290|@0@509@669
+31@8@138@Indulgence@170@90@Reduces your kill rates@@182@184@0@0@177@1@Coins@Coins@181@200@0@1380|@6716@2@1@1380|@0@509@669
+31@1@190@AG Aura@170@60@Increases AG (5 x Level)@@182@184@0@0@177@1@Coins@Coins@181@200@0@1900|@6760@2@6@1900|1901|1902|1903|1904|1905|@0@509@669
+31@2@191@SD Aura@170@60@Increases SD (5 x Level)@@182@184@0@0@177@1@Coins@Coins@181@200@0@1910|@6761@2@6@1910|1911|1912|1913|1914|1915|@0@509@669
+31@8@241@Item Protection@170@45@The durability of items over a certain period of time will not be reduced@@182@184@0@0@177@1@Coins@Coins@181@200@0@2410|@6738@2@6@2410|2411|2412|2413|2414|2415|@0@509@669
+32@1@216@Party Scroll@170@35@Increases exp if you alone (+1%)#Leveling in party for each member increases 1 %more until reaching a exp gained of 5%@@182@184@0@0@177@1@Coins@Coins@181@200@0@2160|@6759@2@6@2160|2161|2162|2163|2164|2165|@0@509@669
+32@2@102@Wealth Seal (Master)@170@35@Increases master exp (+10%)#Increases item drop rate (+10%) #Can be used with other seals@@182@184@0@0@177@1@Coins@Coins@181@200@0@1020|@6750@2@6@1020|1021|1022|1023|1024|1025|@0@509@669
+32@3@101@Wealth Seal@170@35@Increases normal exp (+10%)#Increases item drop rate (+10%)#Can be used with other seals@@182@184@0@0@177@1@Coins@Coins@181@200@0@1010|@6700@2@6@1010|1011|1012|1013|1014|1015|@0@509@669
+32@4@123@Healing Seal@170@35@Increases exp (+5%)#Recovery HP (+5%)#Can be used with other seals@@182@184@0@0@177@1@Coins@Coins@181@200@0@1230|@6718@2@6@1230|1231|1232|1233|1234|1235|@0@509@669
+32@6@104@Pet Skeleton@170@30@Increases damage (+20%).#Increases attack speed (+10)#Increases exp (+5%)#Skeleton Ring/Panda Ring more exp (+30%)@@182@184@0@0@177@1@Coins@Coins@181@200@0@1040|@6779@2@6@1040|1041|1042|1043|1044|1045|@0@509@669
+32@7@105@Pet Panda@170@30@Increases exp (+5%)#Increases defense (+50)#Autopick zen of the floor@@182@184@0@0@177@1@Coins@Coins@181@200@0@1050|@6736@2@6@1050|1051|1052|1053|1054|1055|@0@509@669
+34@1@114@Scroll of Strength@170@30@Increases excellent damage (+5%)@@182@184@0@0@177@1@Coins@Coins@181@200@0@1140|@7266@2@6@1140|1141|1142|1143|1144|1145|@0@509@669
+34@2@113@Scroll of Battle@170@30@Increases critical damage (+5%)@@182@184@0@0@177@1@Coins@Coins@181@200@0@1130|@7265@2@6@1130|1131|1132|1133|1134|1135|@0@509@669
+34@3@107@Scroll of Quickness@170@30@Increases attack speed (+5)@@182@184@0@0@177@1@Coins@Coins@181@200@0@1070|@7240@2@6@1070|1071|1072|1073|1074|1075|@0@509@669
+34@4@109@Scroll of Wrath@170@25@Increases physical damage (+15)@@182@184@0@0@177@1@Coins@Coins@181@200@0@1090|@7242@2@6@1090|1091|1092|1093|1094|1095|@0@509@669
+34@5@110@Scroll of Wizardry@170@25@Increases magic damage (+15)@@182@184@0@0@177@1@Coins@Coins@181@200@0@1100|@7243@2@6@1100|1101|1102|1103|1104|1105|@0@509@669
+34@6@108@Scroll of Defense@170@25@Increases defense (+15)@@182@184@0@0@177@1@Coins@Coins@181@200@0@1080|@7241@2@6@1080|1081|1082|1083|1084|1085|@0@509@669
+34@7@189@Scroll of Recovery@170@25@Recovery HP (+3%)#Increases HP (+50)@@182@184@0@0@177@1@Coins@Coins@181@200@0@1890|@7308@2@6@1890|1891|1892|1893|1894|1895|@0@509@669
+34@8@111@Scroll of Health@170@15@Increases life (+100)@@182@184@0@0@177@1@Coins@Coins@181@200@0@1110|@7244@2@6@1110|1111|1112|1113|1114|1115|@0@509@669
+34@9@112@Scroll of Mana@170@7@Increases mana (+300)@@182@184@0@0@177@1@Coins@Coins@181@200@0@1120|@7245@2@6@1120|1121|1122|1123|1124|1125|@0@509@669
+35@2@115@Demon@170@60@Increases damage (+40%) #Increases attack speed (+10)@@182@184@0@0@177@1@Coins@Coins@181@200@0@1150|@6720@2@6@1150|1151|1152|1153|1154|1155|@0@509@669
+35@3@116@Spirit Guardian@170@60@Absorb damage (+30%)#Increases attack speed (+10)#Increases life (+50)@@182@184@0@0@177@1@Coins@Coins@181@200@0@1160|@6721@2@6@1160|1161|1162|1163|1164|1165|@0@509@669
+35@5@245@Unicorn@170@30@Increases zen drop (+50%)#Increases defense (+100)#  Zen collect automatically#  Requires level 28@@182@184@0@0@177@1@Coins@Coins@181@200@0@2412|2412|2412|2412|2412|2412|@6762@3@2@2422|2423|2424|2425|2426|2427|@0@509@669
+36@1@127@Nightmare (x1)@170@250@Entry to Kanturu Door event@@182@184@0@0@177@1@Coins@Coins@181@200@0@1270|@6694@2@1@1270|@0@509@669
+36@3@136@Blood Castle@170@45@Tickets to Blood Castle event@@182@184@0@0@177@1@Coins@Coins@181@200@0@1360|@6703@2@6@1360|1361|1362|1363|1364|1365|@0@509@669
+36@4@124@Devil Square@170@45@Tickets to Devil Square event@@182@184@0@0@177@1@Coins@Coins@181@200@0@1240|@6702@2@6@1240|1241|1242|1243|1244|1245|@0@509@669
+36@5@126@Illusion Temple@170@45@Tickets to Illusion Temple event@@182@184@0@0@177@1@Coins@Coins@181@200@0@1260|@6717@2@6@1260|1261|1262|1263|1264|1265|@0@509@669
+36@6@125@Kalima Ticket@170@45@Tickets to Kalima Invasion event@@182@184@0@0@177@1@Coins@Coins@181@200@0@1250|@6704@2@6@1250|1251|1252|1253|1254|1255|@0@509@669
+37@7@137@Worn Horseshoe@170@60@Increases item drop rate (+20%)@@182@184@0@0@177@1@Coins@Coins@181@200@0@1370|@6790@2@3@1370|1371|1372|@0@509@669
+37@3@184@Hawk Figurine@170@60@Increases critical damage (+5%)@@182@184@0@0@177@1@Coins@Coins@181@200@0@1840|@6784@2@6@1840|1841|@0@509@669
+37@4@185@Goat Figurine@170@60@Increases excellent damage (+5%)@@182@184@0@0@177@1@Coins@Coins@181@200@0@1850|@6785@2@6@1850|1851|@0@509@669
+37@5@119@Lethal Wizard's Ring@170@60@Increases damage (+5%)#Increases attack speed (+5)@@182@184@0@0@177@1@Coins@Coins@181@200@0@1190|@6763@2@6@1190|1191|@0@509@669
+37@6@118@Wizard's Ring@170@60@Increases damage (+5%) #Increases attack speed (+5)@@182@184@0@0@177@1@Coins@Coins@181@200@0@1180|@6676@2@6@1180|1181|@0@509@669
+37@9@240@Talisman of Resurrection@170@45@If you die you move to the coordinate where you died@@182@184@0@0@177@1@Coins@Coins@181@200@0@2400|@6725@2@1@2400|@0@509@669
+37@7@186@Golden Oak Charm@170@45@Increases HP (+100)#Increases SD (+500)@@182@184@0@0@177@1@Coins@Coins@181@200@0@1860|@6788@2@6@1860|1861|1862|1863|1864|1865|@0@509@669
+37@9@242@Oak Charm@170@25@Increases HP (+50)@@182@184@0@0@177@1@Coins@Coins@181@200@0@2411|2411|2411|2411|2411|2411|@6786@3@2@2416|2417|2418|2419|2420|2421|@0@509@669
+38@1@174@Strength Elixir@170@20@Increases strength (+50)@@182@184@0@0@177@1@Coins@Coins@181@200@0@1740|@7246@2@6@1740|1741|1742|1743|1744|1745|@0@509@669
+38@2@175@Agility Elixir@170@20@Increases agility (+50)@@182@184@0@0@177@1@Coins@Coins@181@200@0@1750|@7247@2@6@1750|1751|1752|1753|1754|1755|@0@509@669
+38@3@176@Vitality Elixir@170@20@Increases vitality (+50)@@182@184@0@0@177@1@Coins@Coins@181@200@0@1760|@7248@2@6@1760|1761|1762|1763|1764|1765|@0@509@669
+38@4@177@Energy Elixir@170@20@Increases energy (+50)@@182@184@0@0@177@1@Coins@Coins@181@200@0@1770|@7249@2@6@1770|1771|1772|1773|1774|1775|@0@509@669
+38@5@178@Command Elixir@170@10@Increases command (+100)@@182@184@0@0@177@1@Coins@Coins@181@200@0@1780|@7250@2@6@1780|1781|1782|1783|1784|1785|@0@509@669
+61@1@183@Ascension Seal (Master)@170@495@Increases master exp (+10%)#Can be used with other seals@@182@185@0@0@177@1@GP@GP@181@200@0@1830|@6749@5@3@1830|1831|1832|@1@0@669
+61@2@141@Ascension Seal@170@245@Increases exp (+10%) #Can be used with other seals@@182@185@0@0@177@1@GP@GP@181@200@0@1410|@6699@5@3@1410|1411|1412|@1@0@669
+61@6@250@Skeleton Ring@170@245@Transforms you into a skeleton#Increases damage (+30)#Increases zen drop (+50%) #Using Skeleton pet more exp (+5%)@@182@185@0@0@177@1@GP@GP@181@200@0@1060|1060|1060|@6778@5@2@1060|1061|1062|@0@0@669
+61@7@251@Panda Ring@170@245@Transforms you into a brown panda#Increases damage (+30)#Increases zen drop (+50%) #Using Skeleton/Panda pets more exp (+5%)@@182@185@0@0@177@1@GP@GP@181@200@0@1030|1030|1030|@6732@5@2@1030|1031|1032|@0@0@669
+62@1@159@Scroll of Strength@170@30@Increases excellent damage (+5%)@@182@185@0@0@177@1@GP@GP@181@200@0@1590|@7266@5@3@1590|1591|1592|@1@0@669
+62@2@158@Scroll of Battle@170@30@Increases critical damage (+5%)@@182@185@0@0@177@1@GP@GP@181@200@0@1580|@7265@5@3@1580|1581|1582|@1@0@669
+62@3@152@Scroll of Quickness@170@30@Increases attack speed (+5)@@182@185@0@0@177@1@GP@GP@181@200@0@1520|@7240@5@3@1520|1521|1522|@1@0@669
+62@4@154@Scroll of Wrath@170@25@Increases physical damage (+15)@@182@185@0@0@177@1@GP@GP@181@200@0@1540|@7242@5@3@1540|1541|1542|@1@0@669
+62@5@155@Scroll of Wizardry@170@25@Increases magic damage (+15)@@182@185@0@0@177@1@GP@GP@181@200@0@1550|@7243@5@3@1550|1551|1552|@1@0@669
+62@6@153@Scroll of Defense@170@25@Increases defense (+15)@@182@185@0@0@177@1@GP@GP@181@200@0@1530|@7241@5@3@1530|1531|1532|@1@0@669
+62@7@210@Scroll of Recovery@170@25@Recovery HP (+3%)#Increases HP (+100)@@182@185@0@0@177@1@GP@GP@181@200@0@2100|@7308@5@3@2100|2101|2102|@1@0@669
+62@8@156@Scroll of Health@170@15@Increases life (+100)@@182@185@0@0@177@1@GP@GP@181@200@0@1560|@7244@5@3@1560|1561|1562|@1@0@669
+62@9@157@Scroll of Mana@170@7@Increases mana (+300)@@182@185@0@0@177@1@GP@GP@181@200@0@1570|@7245@5@3@1570|1571|1572|@1@0@669
+63@1@171@Demon@170@60@Increases damage (+40%)#Increases attack speed (+10)@@182@185@0@0@177@1@GP@GP@181@200@0@1710|@6720@5@3@1710|1711|1712|@1@0@669
+63@2@172@Guardian Spirit@170@60@Absorb damage (+30%) #Increases attack speed (+10) #Increases life (+50)@@182@185@0@0@177@1@GP@GP@181@200@0@1720|@6721@5@3@1720|1721|1722|@1@0@669
+63@5@253@Unicorn@170@30@Increases zen drop (+50%)#Increases defense (+100)#  Zen collect automatically#  Requires level 28@@182@185@0@0@177@1@GP@GP@181@200@0@2414|2414|2414|@6762@5@2@2431|2432|2433|@0@0@669
+64@11@252@Item Protection@170@90@The durability of items over a certain period of time will not be reduced@@182@185@0@0@177@1@GP@GP@181@200@0@1170|1170|1170|@6738@5@2@1170|1171|1172|@0@0@669
+64@4@167@Ruby Necklace@170@120@Increases excellent damage (+10%) #Recovers life automatically (+3%)#Cannot trade or put in store/warehouse@@182@185@0@0@177@1@GP@GP@181@200@0@1670|@6769@5@3@1670|1671|1672|@1@0@669
+64@12@254@Hawk Figurine@170@60@Increases critical damage (+5%)@@182@185@0@0@177@1@GP@GP@181@200@0@2415|2415|2415|@6784@5@2@2434|2435|@0@0@669
+64@13@255@Goat Figurine@170@60@Increases excellent damage (+5%)@@182@185@0@0@177@1@GP@GP@181@200@0@2416|@6785@5@2@2437|2438|@0@0@669
+64@1@165@Lethal Wizard's Ring@170@60@Increases damage (+5%) #Increases attack speed (+5)@@182@185@0@0@177@1@GP@GP@181@200@0@1650|@6763@5@3@1650|1651|@1@0@669
+64@2@166@Wizards Ring@170@60@Increases damage (+5%) #Increases attack speed (+5)@@182@185@0@0@177@1@GP@GP@181@200@0@1660|@6676@5@3@1660|1661|@1@0@669
+64@5@168@Amethyst Ring@170@95@Decreases damage received (+2%) #Recovers life automatically (+3%) #Can use two at a time #Cannot trade or put in store/warehouse@@182@185@0@0@177@1@GP@GP@181@200@0@1680|@6768@5@3@1680|1681|1682|@1@0@669
+64@6@169@Emerald Necklace@170@65@Increases attack speed (+7) #Recovers life automatically (+3%) #Cannot trade or put in store/warehouse@@182@185@0@0@177@1@GP@GP@181@200@0@1690|@6770@5@3@1690|1691|1692|@1@0@669
+64@7@170@Topaz Ring@170@45@Increases zen drop (+30%)#Recovers life automatically (+3%)#Can use two at a time#Cannot trade or put in store/warehouse@@182@185@0@0@177@1@GP@GP@181@200@0@1700|@6767@5@3@1700|1701|1702|@1@0@669
+64@10@248@Golden Oak Charm@170@45@Increases HP (+100)#Increases SD (+500)@@182@185@0@0@177@1@GP@GP@181@200@0@2413|2413|2413|@6788@5@2@2428|2429|2430|@0@0@669
+64@8@131@Oak Charm@170@45@Increases HP (+50)@@182@185@0@0@177@1@GP@GP@181@200@0@1310|@6786@5@3@1310|1311|1312|@1@0@669
+66@6@149@Strength Rebuild Fruit@170@50@Resets points added in strength to readd@@182@185@0@0@177@1@GP@GP@181@200@0@1490|@6710@5@1@1490|@1@0@669
+66@7@150@Agility Rebuild Fruit@170@50@Resets points added in agility to readd@@182@185@0@0@177@1@GP@GP@181@200@0@1500|@6711@5@1@1500|@1@0@669
+66@8@151@Vitality Rebuild Fruit@170@50@Resets points added in vitality to readd@@182@185@0@0@177@1@GP@GP@181@200@0@1510|@6712@5@1@1510|@1@0@669
+66@9@160@Energy Rebuild Fruit@170@50@Resets points added in energy to readd@@182@185@0@0@177@1@GP@GP@181@200@0@1600|@6713@5@1@1600|@1@0@669
+66@10@161@Command Rebuild Fruit@170@50@Resets points added in command to readd@@182@185@0@0@177@1@GP@GP@181@200@0@1610|@6714@5@1@1610|@1@0@669
+67@1@163@Elixir of Strength@170@20@Increases strength (+50)@@182@185@0@0@177@1@GP@GP@181@200@0@1630|@7246@5@3@1630|1631|1632|@1@0@669
+67@2@164@Elixir of Agility@170@20@Increases agility (+50)@@182@185@0@0@177@1@GP@GP@181@200@0@1640|@7247@5@3@1640|1641|1642|@1@0@669
+67@3@203@Elixir of Health@170@20@Increases vitality (+50)@@182@185@0@0@177@1@GP@GP@181@200@0@2030|@7248@5@3@2030|2031|2032|@1@0@669
+67@4@204@Elixir of Energy@170@20@Increases energy (+50)@@182@185@0@0@177@1@GP@GP@181@200@0@2040|@7249@5@3@2040|2041|2042|@1@0@669
+67@5@205@Elixir of Control@170@10@Increases command (+50)@@182@185@0@0@177@1@GP@GP@181@200@0@2050|@7250@5@3@2050|2051|2052|@1@0@669
+68@4@133@Indulgence@170@90@Reduces your kill rates@@182@185@0@0@177@1@GP@GP@181@200@0@1330|@6716@5@1@1330|@1@0@669
+68@5@249@AG Aura@170@60@Increases AG (5 x Level)@@182@185@0@0@177@1@GP@GP@181@200@0@1220|1220|1220|@6760@5@2@1220|1221|1222|@0@0@669
+68@2@134@SD Aura@170@60@Increases SD (10 x Level)@@182@185@0@0@177@1@GP@GP@181@200@0@1340|@6761@5@3@1340|1341|1342|@1@0@669
+68@3@132@Worn Horseshoe@170@60@Increases item drop rate (+20%)@@182@185@0@0@177@1@GP@GP@181@200@0@1320|@6790@5@3@1320|1321|1322|@1@0@669

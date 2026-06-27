@@ -1,0 +1,80 @@
+{
+	"elements": {
+		"character_bg":{
+			"texture":"Engine\\HUD\\healthbar.tga",
+			"src":[0, 0, 113, 25]
+		},
+		"monster_bg":{
+			"texture":"Engine\\HUD\\healthbar.tga",
+			"src":[0, 25, 113, 20]
+		},
+		"life_red":{
+			"texture":"Engine\\HUD\\healthbar.tga",
+			"src":[140, 16, 111, 7]
+		},
+		"life_before":{
+			"texture":"Engine\\HUD\\healthbar.tga",
+			"src":[140, 48, 111, 4]
+		},
+		"life_green":{
+			"texture":"Engine\\HUD\\healthbar.tga",
+			"src":[140, 4, 111, 7]
+		},
+		"shield_bar":{
+			"texture":"Engine\\HUD\\healthbar.tga",
+			"src":[0, 65, 111, 3]
+		}
+	},
+	
+	"player": {
+		"life": [
+			{
+				"element":"character_bg",
+				"layout":[-56, 2, 113, 25]
+			},
+			{
+				"element":"life_before",
+				"layout":[-52, 6, 105, 11],
+				"source":"@before-life"
+			},
+			{
+				"element":"life_red",
+				"layout":[-52, 6, 105, 11],
+				"skins":{
+					"Party": "life_green",
+					"Hero": "life_green"
+				},				
+				"source":"@life"
+			}
+		],
+		"shield": [
+			{
+				"element":"shield_bar",
+				"layout":[-52, 20, 105, 3],
+				"source":"@shield"
+			}
+		]
+	},
+	
+	"monster": {
+		"life": [
+			{
+				"element":"monster_bg",
+				"layout":[-56, 2, 113, 20]
+			},
+			{
+				"element":"life_before",
+				"layout":[-52, 6, 105, 11],
+				"source":"@before-life",
+			},
+			{
+				"element":"life_red",
+				"layout":[-52, 6, 105, 11],
+				"skins":{
+					"Monster_274": "life_green"
+				},
+				"source":"@life"
+			}
+		]
+	}	
+}

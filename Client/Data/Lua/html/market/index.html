@@ -1,0 +1,755 @@
+<!doctype html>
+<html>
+<head>
+	<meta charset="utf-8">
+	<title>Market</title>
+	<style>
+		html, body {
+			margin: 0;
+			width: 100%;
+			height: 100%;
+			background: transparent;
+			color: #d9e6ea;
+			font-family: Arial, Helvetica, sans-serif;
+			overflow: hidden;
+		}
+
+		.market {
+			position: absolute;
+			left: 0;
+			top: 0;
+			right: 0;
+			bottom: 0;
+			display: grid;
+			grid-template-columns: 128px 1fr;
+			gap: 8px;
+			background:
+				radial-gradient(circle at 62% 34%, rgba(0, 128, 130, 0.18), transparent 42%),
+				linear-gradient(180deg, rgba(5, 15, 18, 0.94), rgba(2, 7, 10, 0.92));
+			border: 1px solid rgba(34, 218, 224, 0.16);
+			box-sizing: border-box;
+			padding: 8px;
+		}
+
+		.sidebar,
+		.content,
+		.panel {
+			border: 1px solid rgba(89, 222, 226, 0.13);
+			background: rgba(3, 12, 15, 0.72);
+		}
+
+		.sidebar {
+			display: flex;
+			flex-direction: column;
+			min-width: 0;
+		}
+
+		.side-section {
+			padding: 10px 6px 0;
+		}
+
+		.side-title {
+			margin: 0 6px 5px;
+			color: #21d9db;
+			font-size: 11px;
+			font-weight: 800;
+			text-transform: uppercase;
+		}
+
+		.category {
+			height: 20px;
+			display: flex;
+			align-items: center;
+			gap: 5px;
+			margin-bottom: 1px;
+			padding: 0 6px;
+			color: #aab4ba;
+			font-size: 9px;
+			font-weight: 700;
+			border-left: 3px solid transparent;
+			box-sizing: border-box;
+		}
+
+		.category:hover {
+			background: rgba(35, 210, 216, 0.10);
+			color: white;
+		}
+
+		.category.active {
+			background: linear-gradient(90deg, rgba(21, 225, 226, 0.28), rgba(21, 225, 226, 0.06));
+			border-left-color: #21e8ef;
+			color: #ffffff;
+			box-shadow: inset -2px 0 0 rgba(33, 232, 239, 0.65);
+		}
+
+		.cat-icon {
+			width: 13px;
+			color: #d9e6ea;
+			text-align: center;
+			font-size: 11px;
+		}
+
+		.featured {
+			margin-top: auto;
+			padding: 8px 6px 6px;
+		}
+
+		.feature-card,
+		.currency-card {
+			border: 1px solid rgba(89, 222, 226, 0.13);
+			background: rgba(3, 12, 15, 0.72);
+			padding: 7px;
+			margin-bottom: 7px;
+		}
+
+		.feature-card .art {
+			height: 50px;
+			margin-bottom: 2px;
+		}
+
+		.feature-name {
+			text-align: center;
+			font-size: 10px;
+			font-weight: 800;
+			color: #fff;
+		}
+
+		.feature-meta {
+			text-align: center;
+			margin-top: 2px;
+			font-size: 9px;
+			color: #d0d9dc;
+		}
+
+		.currency-row {
+			display: flex;
+			justify-content: space-between;
+			margin-top: 5px;
+			color: #b8c4c7;
+			font-size: 10px;
+		}
+
+		.currency-row strong,
+		.price {
+			color: #ffc941;
+			font-weight: 900;
+		}
+
+		.content {
+			display: flex;
+			flex-direction: column;
+			min-width: 0;
+			padding: 0 8px 7px;
+			box-sizing: border-box;
+		}
+
+		.toolbar {
+			height: 34px;
+			display: grid;
+			grid-template-columns: 1fr 122px 112px;
+			gap: 5px;
+			align-items: center;
+		}
+
+		.heading {
+			color: #21d9db;
+			font-size: 13px;
+			font-weight: 900;
+			text-transform: uppercase;
+		}
+
+		input,
+		select {
+			height: 24px;
+			border: 1px solid rgba(130, 218, 222, 0.18);
+			background: rgba(2, 8, 11, 0.72);
+			color: #cbd7da;
+			padding: 0 6px;
+			font-size: 10px;
+			box-sizing: border-box;
+		}
+
+		.grid {
+			flex: 1;
+			display: grid;
+			grid-template-columns: repeat(4, 1fr);
+			grid-auto-rows: 285px;
+			gap: 7px;
+			justify-content: start;
+			align-content: start;
+			overflow: hidden;
+			padding-top: 5px;
+		}
+
+		.card {
+			position: relative;
+			height: 285px;
+			min-width: 0;
+			background:
+				radial-gradient(circle at 50% 25%, rgba(0, 145, 145, 0.18), transparent 44%),
+				linear-gradient(180deg, rgba(4, 17, 20, 0.88), rgba(2, 8, 11, 0.95));
+			border: 1px solid rgba(130, 218, 222, 0.16);
+			padding: 8px 7px 7px;
+			box-sizing: border-box;
+			display: flex;
+			flex-direction: column;
+			align-items: center;
+		}
+
+		.card:hover {
+			border-color: rgba(33, 232, 239, 0.55);
+			background:
+				radial-gradient(circle at 50% 25%, rgba(0, 190, 190, 0.22), transparent 44%),
+				linear-gradient(180deg, rgba(5, 24, 28, 0.92), rgba(2, 9, 12, 0.95));
+		}
+
+		.badge {
+			position: absolute;
+			right: 0;
+			top: 0;
+			width: 46px;
+			height: 20px;
+			line-height: 20px;
+			text-align: center;
+			background: #b51f2b;
+			color: white;
+			font-size: 8px;
+			font-weight: 900;
+			transform: rotate(45deg) translate(12px, -9px);
+		}
+
+		.badge.new {
+			background: #0b9397;
+		}
+
+		.badge.sale {
+			background: #d34662;
+		}
+
+		.art {
+			position: relative;
+			width: 82px;
+			height: 104px;
+			margin-bottom: 6px;
+			transform: scale(0.72);
+			transform-origin: center;
+		}
+
+		.item-name {
+			font-size: 14px;
+			font-weight: 700;
+			color: #f0f4f5;
+			text-align: center;
+			white-space: nowrap;
+			max-width: 100%;
+			overflow: hidden;
+			text-overflow: ellipsis;
+		}
+
+		.item-type,
+		.item-meta {
+			margin-top: 2px;
+			font-size: 10px;
+			color: #a7b4b8;
+			text-align: center;
+			min-height: 12px;
+			max-width: 100%;
+			white-space: nowrap;
+			overflow: hidden;
+			text-overflow: ellipsis;
+		}
+
+		.price {
+			margin-top: 4px;
+			font-size: 16px;
+		}
+
+		.buy {
+			margin-top: auto;
+			width: 100%;
+			height: 24px;
+			line-height: 23px;
+			text-align: center;
+			color: #20e3e9;
+			font-size: 10px;
+			font-weight: 900;
+			border: 1px solid rgba(32, 227, 233, 0.55);
+			background: rgba(7, 28, 32, 0.72);
+		}
+
+		.buy:hover {
+			background: rgba(18, 136, 143, 0.38);
+			color: white;
+		}
+
+		.pagination {
+			height: 34px;
+			display: flex;
+			align-items: center;
+			justify-content: center;
+			gap: 5px;
+		}
+
+		.page {
+			width: 25px;
+			height: 25px;
+			line-height: 24px;
+			text-align: center;
+			border: 1px solid rgba(130, 218, 222, 0.16);
+			background: rgba(255, 255, 255, 0.025);
+			color: #c8d2d5;
+			font-weight: 800;
+		}
+
+		.page.active {
+			background: linear-gradient(180deg, #1ccbd0, #087f83);
+			color: white;
+			box-shadow: 0 0 14px rgba(33, 232, 239, 0.25);
+		}
+
+		.footer {
+			height: 16px;
+			text-align: center;
+			color: rgba(201, 213, 217, 0.55);
+			font-size: 9px;
+		}
+
+		.status {
+			color: #20e3e9;
+		}
+
+		/* Lightweight CSS item art placeholders. Lua can later send real image paths. */
+		.art::before,
+		.art::after,
+		.shape {
+			content: "";
+			position: absolute;
+			left: 50%;
+			top: 50%;
+			transform: translate(-50%, -50%);
+		}
+
+		.art-sword::before {
+			width: 22px;
+			height: 112px;
+			background: linear-gradient(90deg, #cad1d2, #6d7779, #f5ffff);
+			transform: translate(-50%, -50%) rotate(-36deg);
+			clip-path: polygon(50% 0, 80% 12%, 62% 100%, 38% 100%, 20% 12%);
+		}
+		.art-sword::after {
+			width: 72px;
+			height: 12px;
+			background: linear-gradient(90deg, #805322, #f0b95c, #805322);
+			transform: translate(-50%, 30px) rotate(-36deg);
+		}
+		.art-bag::before {
+			width: 104px;
+			height: 86px;
+			border-radius: 16px;
+			background: linear-gradient(135deg, #5c351c, #b87533 45%, #3e2414);
+			box-shadow: inset 0 0 0 7px rgba(35, 16, 8, 0.45);
+		}
+		.art-scroll::before {
+			width: 108px;
+			height: 74px;
+			border-radius: 13px;
+			background: linear-gradient(135deg, #ecd9b5, #9f6f48);
+			box-shadow: inset 0 0 0 8px rgba(117, 45, 25, 0.35);
+		}
+		.art-potion::before,
+		.art-mana::before {
+			width: 70px;
+			height: 92px;
+			border-radius: 34px 34px 40px 40px;
+			background: radial-gradient(circle at 50% 65%, #ff2937, #70151e 68%);
+			border: 4px solid #bda06e;
+		}
+		.art-mana::before {
+			background: radial-gradient(circle at 50% 65%, #35c8ff, #10417d 68%);
+		}
+		.art-shield::before {
+			width: 94px;
+			height: 104px;
+			background: linear-gradient(135deg, #d9d4bd, #28435e 45%, #111a24);
+			clip-path: polygon(50% 0, 92% 16%, 78% 78%, 50% 100%, 22% 78%, 8% 16%);
+			border: 4px solid #c7a857;
+		}
+		.art-armor::before,
+		.art-helm::before,
+		.art-gloves::before {
+			width: 100px;
+			height: 110px;
+			background: linear-gradient(135deg, #32383c, #b7a77d 42%, #131b20);
+			clip-path: polygon(20% 8%, 80% 8%, 92% 35%, 75% 100%, 25% 100%, 8% 35%);
+		}
+		.art-helm::before {
+			width: 82px;
+			height: 76px;
+			clip-path: polygon(16% 35%, 28% 10%, 72% 10%, 84% 35%, 78% 90%, 22% 90%);
+		}
+		.art-gloves::before {
+			width: 92px;
+			height: 82px;
+			clip-path: polygon(10% 24%, 62% 8%, 90% 40%, 78% 92%, 32% 86%);
+		}
+		.art-wings::before {
+			width: 144px;
+			height: 96px;
+			background: linear-gradient(135deg, #4a1222, #ba2635 58%, #171010);
+			clip-path: polygon(0 25%, 42% 0, 50% 42%, 58% 0, 100% 25%, 76% 92%, 50% 62%, 24% 92%);
+			border: 2px solid rgba(245, 153, 66, 0.55);
+		}
+		.art-jewel::before {
+			width: 88px;
+			height: 104px;
+			background: linear-gradient(135deg, #ffb6cf, #e61761 45%, #6b0d2d);
+			clip-path: polygon(50% 0, 92% 28%, 72% 100%, 28% 100%, 8% 28%);
+		}
+		.art-chest::before,
+		.art-bundle::before {
+			width: 100px;
+			height: 82px;
+			border-radius: 12px;
+			background: linear-gradient(180deg, #8d4e24, #3c2112);
+			border: 4px solid #d9ae55;
+		}
+		.art-pet::before {
+			width: 100px;
+			height: 86px;
+			background: linear-gradient(135deg, #271b34, #8c2a46 50%, #171010);
+			clip-path: polygon(50% 0, 86% 12%, 100% 50%, 78% 100%, 50% 72%, 22% 100%, 0 50%, 14% 12%);
+		}
+		.art-staff::before,
+		.art-seal::before {
+			width: 20px;
+			height: 118px;
+			background: linear-gradient(90deg, #6b3b1e, #e0a852, #6b3b1e);
+			transform: translate(-50%, -50%) rotate(26deg);
+		}
+		.art-staff::after,
+		.art-seal::after {
+			width: 54px;
+			height: 54px;
+			border-radius: 50%;
+			background: radial-gradient(circle, #53eaff, #174870 72%);
+			transform: translate(-18px, -58px);
+		}
+		.art-seal::before {
+			width: 86px;
+			height: 86px;
+			border-radius: 50%;
+			background: radial-gradient(circle, #fff5a8, #94671e 70%);
+			transform: translate(-50%, -50%);
+		}
+		.art-seal::after {
+			display: none;
+		}
+	</style>
+</head>
+<body>
+	<section class="market" id="market-root">
+		<aside class="sidebar">
+			<div class="side-section">
+				<div class="side-title">Category</div>
+				<div id="category-list"></div>
+			</div>
+
+			<div class="featured">
+				<div class="side-title">Featured</div>
+				<div class="feature-card" id="featured-card"></div>
+
+				<div class="side-title">Currency</div>
+				<div class="currency-card">
+					<div class="currency-row"><span>WCoinC</span><strong id="currency-wcoinc">0</strong></div>
+					<div class="currency-row"><span>WCoinP</span><strong id="currency-wcoinp">0</strong></div>
+					<div class="currency-row"><span>Goblin</span><strong id="currency-goblin">0</strong></div>
+				</div>
+			</div>
+		</aside>
+
+		<main class="content">
+			<div class="toolbar">
+				<div class="heading" id="market-heading">All Items</div>
+				<input id="search-input" type="text" value="" placeholder="Search item...">
+				<select id="sort-select">
+					<option value="default">Sort by: Default</option>
+					<option value="price_asc">Price: Low to High</option>
+					<option value="price_desc">Price: High to Low</option>
+					<option value="name">Name</option>
+				</select>
+			</div>
+
+			<div class="grid" id="market-grid"></div>
+			<div class="pagination" id="pagination"></div>
+			<div class="footer"><span id="market-count">0 items</span> | <span class="status" id="market-status">Waiting for Lua...</span></div>
+		</main>
+	</section>
+
+	<script>
+		(function () {
+			var state = {
+				windowId: "html_market",
+				categories: [],
+				items: [],
+				featured: null,
+				category: "all",
+				query: "",
+				sort: "default",
+				page: 1,
+				totalPages: 1,
+				totalItems: 0,
+				events: {}
+			};
+
+			var icons = {
+				box: "■", sword: "†", armor: "◆", shield: "◈", helm: "●", ring: "○",
+				potion: "♟", scroll: "▱", chest: "▣", wing: "⌁", pet: "☼", bundle: "✦"
+			};
+
+			function query(selector) {
+				if (document.$) return document.$(selector);
+				return document.querySelector(selector);
+			}
+
+			function bindEvent(element, type, handler) {
+				if (!element) return;
+				if (element.on) element.on(type, handler);
+				else element.addEventListener(type, handler);
+			}
+
+			function text(value) {
+				return value === undefined || value === null ? "" : String(value);
+			}
+
+			function escapeHtml(value) {
+				return text(value)
+					.replace(/&/g, "&amp;")
+					.replace(/</g, "&lt;")
+					.replace(/>/g, "&gt;")
+					.replace(/"/g, "&quot;");
+			}
+
+			function number(value) {
+				return text(value === undefined || value === null ? 0 : value).replace(/\B(?=(\d{3})+(?!\d))/g, ",");
+			}
+
+			function setText(selector, value) {
+				var element = query(selector);
+				if (element) element.textContent = text(value);
+			}
+
+			function actionFor(selector, type, fallback) {
+				var key = selector + ":" + type;
+				return state.events && state.events[key] ? state.events[key] : fallback;
+			}
+
+			function emit(eventName, payload) {
+				if (!globalThis.htmluiRequest || !eventName) return false;
+				return !!globalThis.htmluiRequest(eventName, payload || {});
+			}
+
+			function itemArt(item) {
+				var art = item && item.art ? item.art : "box";
+				return '<div class="art art-' + escapeHtml(art) + '"></div>';
+			}
+
+			function renderCategories() {
+				var root = query("#category-list");
+				if (!root) return;
+
+				var html = "";
+				for (var i = 0; i < state.categories.length; i++) {
+					var category = state.categories[i] || {};
+					var active = category.id === state.category ? " active" : "";
+					html += '<div class="category' + active + '" id="category-' + escapeHtml(category.id) + '">' +
+						'<span class="cat-icon">' + escapeHtml(icons[category.icon] || "■") + '</span>' +
+						'<span>' + escapeHtml(category.label) + '</span>' +
+						'</div>';
+				}
+				root.innerHTML = html;
+
+				for (var index = 0; index < state.categories.length; index++) {
+					(function (category) {
+						bindEvent(query("#category-" + category.id), "click", function () {
+							state.category = category.id;
+							emit(actionFor("#category-list", "click", "Market.Category"), {
+								windowId: state.windowId,
+								category: category.id
+							});
+						});
+					})(state.categories[index]);
+				}
+			}
+
+			function renderFeatured() {
+				var root = query("#featured-card");
+				var item = state.featured;
+				if (!root || !item) return;
+				root.innerHTML =
+					itemArt(item) +
+					'<div class="feature-name">' + escapeHtml(item.name) + '</div>' +
+					'<div class="feature-meta">' + escapeHtml(item.meta || "") + '</div>' +
+					'<div class="price">◎ ' + escapeHtml(number(item.price)) + '</div>' +
+					'<div class="buy" id="featured-buy">BUY ITEM</div>';
+				bindEvent(query("#featured-buy"), "click", function () {
+					emit(actionFor("#market-grid", "click", "Market.Buy"), {
+						windowId: state.windowId,
+						id: item.id
+					});
+				});
+			}
+
+			function renderGrid() {
+				var root = query("#market-grid");
+				if (!root) return;
+
+				var html = "";
+				for (var i = 0; i < state.items.length; i++) {
+					var item = state.items[i] || {};
+					var badge = item.badge ? '<div class="badge ' + escapeHtml(String(item.badge).toLowerCase()) + '">' + escapeHtml(item.badge) + '</div>' : "";
+					html += '<div class="card" id="item-' + escapeHtml(item.id) + '">' +
+						badge +
+						itemArt(item) +
+						'<div class="item-name">' + escapeHtml(item.name) + '</div>' +
+						'<div class="item-type">' + escapeHtml(item.type) + '</div>' +
+						'<div class="item-meta">' + escapeHtml(item.meta) + '</div>' +
+						'<div class="price">◎ ' + escapeHtml(number(item.price)) + '</div>' +
+						'<div class="buy" id="buy-' + escapeHtml(item.id) + '">BUY ITEM</div>' +
+						'</div>';
+				}
+
+				if (state.items.length === 0) {
+					html = '<div class="panel" style="grid-column:1/5;padding:24px;text-align:center;color:#9fb0b4;">No items found.</div>';
+				}
+				root.innerHTML = html;
+
+				for (var index = 0; index < state.items.length; index++) {
+					(function (item) {
+						bindEvent(query("#buy-" + item.id), "click", function () {
+							emit(actionFor("#market-grid", "click", "Market.Buy"), {
+								windowId: state.windowId,
+								id: item.id
+							});
+						});
+					})(state.items[index]);
+				}
+			}
+
+			function renderPagination() {
+				var root = query("#pagination");
+				if (!root) return;
+
+				var html = "";
+				for (var page = 1; page <= state.totalPages; page++) {
+					html += '<div class="page' + (page === state.page ? ' active' : '') + '" id="page-' + page + '">' + page + '</div>';
+				}
+				root.innerHTML = html;
+
+				for (var index = 1; index <= state.totalPages; index++) {
+					(function (page) {
+						bindEvent(query("#page-" + page), "click", function () {
+							emit(actionFor("#pagination", "click", "Market.Page"), {
+								windowId: state.windowId,
+								page: page
+							});
+						});
+					})(index);
+				}
+			}
+
+			function renderCurrency(currency) {
+				currency = currency || {};
+				setText("#currency-wcoinc", number(currency.wcoinc || 0));
+				setText("#currency-wcoinp", number(currency.wcoinp || 0));
+				setText("#currency-goblin", number(currency.goblin || 0));
+			}
+
+			function categoryLabel() {
+				for (var i = 0; i < state.categories.length; i++) {
+					if (state.categories[i].id === state.category) return state.categories[i].label;
+				}
+				return "All Items";
+			}
+
+			function applyData(data) {
+				data = data || {};
+				state.categories = data.categories || [];
+				state.items = data.items || [];
+				state.featured = data.featured || null;
+				state.category = data.category || "all";
+				state.query = data.query || "";
+				state.sort = data.sort || "default";
+				state.page = Number(data.page || 1);
+				state.totalPages = Number(data.total_pages || 1);
+				state.totalItems = Number(data.total_items || state.items.length);
+
+				setText("#market-heading", categoryLabel());
+				setText("#market-count", state.totalItems + " items");
+				setText("#market-status", data.message || "Market ready");
+
+				var search = query("#search-input");
+				if (search) search.value = state.query;
+				var sort = query("#sort-select");
+				if (sort) sort.value = state.sort;
+
+				renderCategories();
+				renderFeatured();
+				renderGrid();
+				renderPagination();
+				renderCurrency(data.currency || {});
+			}
+
+			globalThis.htmluiReceive = function (eventName, payload) {
+				if (eventName === "sfui:open") {
+					if (payload && payload.windowId) state.windowId = payload.windowId;
+					return true;
+				}
+
+				if (eventName === "sfui:config") {
+					if (payload && payload.windowId) state.windowId = payload.windowId;
+					state.events = payload && payload.events ? payload.events : state.events;
+					return true;
+				}
+
+				if (eventName === "sfui:message") {
+					if (payload && payload.windowId && payload.windowId !== state.windowId) return false;
+					if (payload && payload.action === "setData") {
+						applyData(payload.payload || {});
+						return true;
+					}
+				}
+
+				return false;
+			};
+
+			bindEvent(query("#search-input"), "change", function () {
+				emit(actionFor("#search-input", "change", "Market.Search"), {
+					windowId: state.windowId,
+					query: query("#search-input").value || ""
+				});
+			});
+
+			bindEvent(query("#search-input"), "keyup", function (evt) {
+				var code = evt ? (evt.keyCode || evt.which || 0) : 0;
+				if (code === 13) {
+					emit(actionFor("#search-input", "change", "Market.Search"), {
+						windowId: state.windowId,
+						query: query("#search-input").value || ""
+					});
+				}
+			});
+
+			bindEvent(query("#sort-select"), "change", function () {
+				emit(actionFor("#sort-select", "change", "Market.Sort"), {
+					windowId: state.windowId,
+					sort: query("#sort-select").value || "default"
+				});
+			});
+
+			setTimeout(function () {
+				emit("Market.Ready", { windowId: state.windowId });
+			}, 1);
+		})();
+	</script>
+</body>
+</html>

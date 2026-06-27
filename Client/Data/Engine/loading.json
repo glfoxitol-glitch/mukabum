@@ -1,0 +1,19 @@
+{
+    "enable": true,
+	"background": {
+		"left": "Engine\\HUD\\loading\\kIJY18U_left.jpg",
+		"right": "Engine\\HUD\\loading\\kIJY18U_right.jpg"
+	},
+
+	"frame": {
+		"texture": "Engine\\HUD\\loading\\KMUA2_Loading.tga"
+	},
+
+	"bar": {
+		"texture": "Engine\\HUD\\loading\\kIJY18U_bar.jpg",	
+		"size": [938, 8],
+		"offset": [43, 46]
+	},
+
+	"resolution": [1024, 768]
+}

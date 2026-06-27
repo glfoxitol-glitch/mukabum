@@ -1,0 +1,70 @@
+{
+  "chat_styles": [
+    {
+      "type": "TYPE_ALL_MESSAGE",
+      "bg": [0, 0, 0, 150],
+      "text": [205, 220, 239, 255],
+      "font": "normal"
+    },
+    {
+      "type": "TYPE_CHAT_MESSAGE",
+      "bg": [0, 0, 0, 150],
+      "text": [205, 220, 239, 255],
+      "font": "normal"
+    },
+    {
+      "type": "TYPE_WHISPER_MESSAGE",
+      "bg": [255, 200, 50, 150],
+      "text": [0, 0, 0, 255],
+      "font": "normal"
+    },
+    {
+      "type": "TYPE_SYSTEM_MESSAGE",
+      "bg": [0, 0, 0, 150],
+      "text": [100, 150, 255, 255],
+      "font": "normal"
+    },
+    {
+      "type": "TYPE_ERROR_MESSAGE",
+      "bg": [0, 0, 0, 150],
+      "text": [255, 30, 0, 255],
+      "font": "normal"
+    },
+    {
+      "type": "TYPE_PARTY_MESSAGE",
+      "bg": [0, 200, 255, 150],
+      "text": [0, 0, 0, 255],
+      "font": "normal"
+    },
+    {
+      "type": "TYPE_GUILD_MESSAGE",
+      "bg": [0, 255, 150, 200],
+      "text": [0, 0, 0, 255],
+      "font": "normal"
+    },
+    {
+      "type": "TYPE_UNION_MESSAGE",
+      "bg": [200, 200, 0, 200],
+      "text": [0, 0, 0, 255],
+      "font": "normal"
+    },
+    {
+      "type": "TYPE_GM_MESSAGE",
+      "bg": [30, 30, 30, 200],
+      "text": [250, 200, 50, 255],
+      "font": "bold"
+    },
+    {
+      "type": "TYPE_GENS_MESSAGE",
+      "bg": [230, 230, 233, 200],
+      "text": [0, 0, 0, 255],
+      "font": "normal"
+    },
+    {
+      "type": "TYPE_POST_MESSAGE",
+      "bg": [0, 0, 0, 150],
+      "text": [179, 255, 0, 255],
+      "font": "bold"
+    }
+  ]
+}

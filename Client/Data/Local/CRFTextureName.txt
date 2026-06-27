@@ -1,0 +1,5 @@
+//Kit Weapons Lightning S19 Part2 by Kapocha
+K_Elec_light01_1X4.jpg
+alpha_line2.jpg
+Glow_26.jpg
+light_blue.jpg

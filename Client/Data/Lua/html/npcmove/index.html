@@ -1,0 +1,442 @@
+<!doctype html>
+<html>
+<head>
+	<meta charset="utf-8">
+	<title>Move</title>
+	<style>
+		html, body {
+			margin: 0;
+			width: 100%;
+			height: 100%;
+			background: transparent;
+			color: #eef4ff;
+			font-family: Arial, Helvetica, sans-serif;
+			overflow: hidden;
+		}
+
+		.shell {
+			position: absolute;
+			left: 0;
+			top: 0;
+			right: 0;
+			bottom: 0;
+			background: rgba(4, 8, 13, 0.84);
+			border: 1px solid rgba(120, 220, 255, 0.18);
+		}
+
+		.header {
+			height: 70px;
+			padding: 15px 18px 0;
+			background: linear-gradient(to bottom, rgba(21, 39, 51, 0.68), rgba(4, 8, 13, 0.08));
+			box-sizing: border-box;
+		}
+
+		.titlebar {
+			display: flex;
+			align-items: center;
+			justify-content: space-between;
+		}
+
+		.title {
+			font-family: Georgia, "Times New Roman", serif;
+			font-size: 28px;
+			font-weight: 700;
+			letter-spacing: 0;
+			color: #ffffff;
+			text-shadow: 0 2px 10px rgba(0, 0, 0, 0.9);
+		}
+
+		.tools {
+			display: flex;
+			gap: 6px;
+		}
+
+		.icon-button {
+			width: 27px;
+			height: 24px;
+			border: 1px solid rgba(255, 255, 255, 0.14);
+			background: rgba(255, 255, 255, 0.06);
+			color: #dfe9f6;
+			font-size: 14px;
+			font-weight: 700;
+			text-align: center;
+			line-height: 22px;
+		}
+
+		.icon-button:hover {
+			background: rgba(98, 223, 255, 0.16);
+		}
+
+		.subtitle {
+			margin-top: 4px;
+			font-size: 12px;
+			color: #93a9bf;
+		}
+
+		.content {
+			display: flex;
+			gap: 14px;
+			height: calc(100% - 70px);
+			padding: 14px 16px 16px;
+			box-sizing: border-box;
+		}
+
+		.list {
+			width: 255px;
+			height: 100%;
+			overflow-y: auto;
+			background: rgba(255, 255, 255, 0.035);
+			border: 1px solid rgba(255, 255, 255, 0.06);
+		}
+
+		.destination {
+			min-height: 58px;
+			padding: 9px 12px;
+			border-bottom: 1px solid rgba(255, 255, 255, 0.055);
+			background: rgba(255, 255, 255, 0.025);
+			box-sizing: border-box;
+		}
+
+		.destination:hover {
+			background: rgba(72, 190, 255, 0.12);
+		}
+
+		.destination.selected {
+			background: linear-gradient(to right, rgba(70, 205, 255, 0.28), rgba(102, 255, 0, 0.10));
+			border-left: 3px solid #62dfff;
+			padding-left: 9px;
+		}
+
+		.dest-name {
+			font-size: 16px;
+			font-weight: 700;
+			color: #ffffff;
+		}
+
+		.dest-meta {
+			margin-top: 4px;
+			font-size: 11px;
+			color: #9db0c4;
+		}
+
+		.detail {
+			flex: 1;
+			height: 100%;
+			background: rgba(3, 6, 10, 0.48);
+			border: 1px solid rgba(255, 255, 255, 0.06);
+			padding: 16px;
+			box-sizing: border-box;
+			display: flex;
+			flex-direction: column;
+			min-width: 0;
+		}
+
+		.detail-name {
+			font-size: 24px;
+			font-weight: 700;
+			color: #ffffff;
+			white-space: nowrap;
+			overflow: hidden;
+			text-overflow: ellipsis;
+		}
+
+		.detail-type {
+			margin-top: 5px;
+			font-size: 12px;
+			color: #67dfff;
+			text-transform: uppercase;
+		}
+
+		.stats {
+			margin-top: 20px;
+			display: flex;
+			flex-direction: column;
+			gap: 8px;
+		}
+
+		.stat {
+			display: flex;
+			align-items: center;
+			min-height: 24px;
+			font-size: 12px;
+			color: #b9c6d4;
+		}
+
+		.label {
+			width: 92px;
+			color: #718399;
+		}
+
+		.value {
+			flex: 1;
+			text-align: right;
+			color: #ffffff;
+			font-weight: 700;
+			overflow: hidden;
+			text-overflow: ellipsis;
+			white-space: nowrap;
+		}
+
+		.cost {
+			color: #a4ff32;
+		}
+
+		.move-button {
+			margin-top: auto;
+			height: 48px;
+			display: flex;
+			align-items: center;
+			justify-content: center;
+			background: linear-gradient(#7bff00, #34a800);
+			color: #ffffff;
+			font-size: 17px;
+			font-weight: 700;
+			text-shadow: 0 1px 2px rgba(0, 0, 0, 0.5);
+		}
+
+		.move-button:hover {
+			background: linear-gradient(#9aff1d, #43c200);
+		}
+
+		.empty {
+			padding: 22px;
+			color: #90a0b2;
+			font-size: 13px;
+			line-height: 1.45;
+		}
+	</style>
+</head>
+<body>
+	<section class="shell" id="move-root">
+		<div class="header">
+			<div class="titlebar">
+				<div class="title">MOVE</div>
+				<div class="tools">
+					<div class="icon-button" id="btn-refresh" title="Refresh">R</div>
+					<div class="icon-button" id="btn-close" title="Close">X</div>
+				</div>
+			</div>
+			<div class="subtitle" id="subtitle">Waiting for Lua...</div>
+		</div>
+		<div class="content">
+			<div class="list" id="move-list"></div>
+			<div class="detail">
+				<div class="detail-name" id="detail-name">Destino</div>
+				<div class="detail-type" id="detail-type">NPC Move</div>
+				<div class="stats">
+					<div class="stat"><div class="label">Mapa</div><div class="value" id="detail-map">-</div></div>
+					<div class="stat"><div class="label">Posicion</div><div class="value" id="detail-pos">-</div></div>
+					<div class="stat"><div class="label">Nivel</div><div class="value" id="detail-level">-</div></div>
+					<div class="stat"><div class="label">Reset</div><div class="value" id="detail-reset">-</div></div>
+					<div class="stat"><div class="label">Zen</div><div class="value cost" id="detail-zen">0</div></div>
+					<div class="stat"><div class="label">Coins</div><div class="value" id="detail-coin">0 / 0 / 0</div></div>
+					<div class="stat"><div class="label">Item</div><div class="value" id="detail-item">No requerido</div></div>
+				</div>
+				<div class="move-button" id="btn-move">MOVER</div>
+			</div>
+		</div>
+	</section>
+
+	<script>
+		(function () {
+			var state = {
+				windowId: "#windows_move",
+				rows: [],
+				selectedIndex: 0,
+				selected: null,
+				events: {}
+			};
+
+			function query(selector) {
+				if (document.$) return document.$(selector);
+				return document.querySelector(selector);
+			}
+
+			function bindEvent(element, type, handler) {
+				if (!element) return;
+				if (element.on) element.on(type, handler);
+				else element.addEventListener(type, handler);
+			}
+
+			function text(value) {
+				return value === undefined || value === null ? "" : String(value);
+			}
+
+			function escapeHtml(value) {
+				return text(value)
+					.replace(/&/g, "&amp;")
+					.replace(/</g, "&lt;")
+					.replace(/>/g, "&gt;")
+					.replace(/"/g, "&quot;");
+			}
+
+			function setText(selector, value) {
+				var element = query(selector);
+				if (element) element.textContent = text(value);
+			}
+
+			function number(value) {
+				var raw = text(value === undefined || value === null ? 0 : value);
+				return raw.replace(/\B(?=(\d{3})+(?!\d))/g, ",");
+			}
+
+			function emit(eventName, payload) {
+				if (!globalThis.htmluiRequest || !eventName) return false;
+				return !!globalThis.htmluiRequest(eventName, payload || {});
+			}
+
+			function actionFor(selector, type, fallback) {
+				var key = selector + ":" + type;
+				return state.events && state.events[key] ? state.events[key] : fallback;
+			}
+
+			function findRow(index) {
+				for (var i = 0; i < state.rows.length; i++) {
+					if (Number(state.rows[i].index) === Number(index)) return state.rows[i];
+				}
+				return state.rows[0] || null;
+			}
+
+			function selectedRow() {
+				return state.selected || findRow(state.selectedIndex);
+			}
+
+			function renderList() {
+				var list = query("#move-list");
+				if (!list) return;
+
+				if (!state.rows || state.rows.length === 0) {
+					list.innerHTML = '<div class="empty">No hay destinos disponibles.</div>';
+					return;
+				}
+
+				var html = "";
+				for (var i = 0; i < state.rows.length; i++) {
+					var row = state.rows[i] || {};
+					var index = Number(row.index || 0);
+					html += '<div class="destination' + (index === Number(state.selectedIndex) ? ' selected' : '') + '" id="move-row-' + index + '">' +
+						'<div class="dest-name">' + escapeHtml(row.name || "Destino") + '</div>' +
+						'<div class="dest-meta">Lv ' + escapeHtml(row.min_level || 0) + ' / ' + escapeHtml(number(row.zen || 0)) + ' Zen</div>' +
+						'</div>';
+				}
+				list.innerHTML = html;
+
+				for (var j = 0; j < state.rows.length; j++) {
+					(function (row) {
+						var rowIndex = Number(row.index || 0);
+						var rowId = Number(row.id || -1);
+						bindEvent(query("#move-row-" + rowIndex), "click", function () {
+							state.selectedIndex = rowIndex;
+							state.selected = findRow(rowIndex);
+							renderList();
+							renderDetail();
+						emit(actionFor("#move-list", "click", "NpcMove.Select"), {
+							windowId: state.windowId,
+							row: rowIndex,
+							id: rowId
+							});
+						});
+					})(state.rows[j] || {});
+				}
+			}
+
+			function renderDetail() {
+				var row = selectedRow();
+				if (!row) {
+					setText("#detail-name", "Sin destino");
+					setText("#detail-type", "NPC Move");
+					setText("#detail-map", "-");
+					setText("#detail-pos", "-");
+					setText("#detail-level", "-");
+					setText("#detail-reset", "-");
+					setText("#detail-zen", "0");
+					setText("#detail-coin", "0 / 0 / 0");
+					setText("#detail-item", "No requerido");
+					return;
+				}
+
+				setText("#detail-name", row.name || "Destino");
+				setText("#detail-type", row.type || "move");
+				setText("#detail-map", row.map);
+				setText("#detail-pos", text(row.x) + ", " + text(row.y));
+				setText("#detail-level", Number(row.min_level || 0) > 0 ? row.min_level : "-");
+				setText("#detail-reset", Number(row.min_reset || 0) > 0 ? row.min_reset : "-");
+				setText("#detail-zen", number(row.zen || 0));
+				setText("#detail-coin", [row.coin1 || 0, row.coin2 || 0, row.coin3 || 0].join(" / "));
+				setText("#detail-item", row.has_item ? ("Item " + row.item_index + " +" + row.item_level + " x" + row.item_count) : "No requerido");
+			}
+
+			function applyData(data) {
+				data = data || {};
+				state.rows = data.rows || [];
+				state.selectedIndex = data.selected_index === undefined || data.selected_index === null ? 0 : Number(data.selected_index);
+				state.selected = data.selected || findRow(state.selectedIndex);
+
+				var context = data.context || {};
+				var count = data.count === undefined || data.count === null ? state.rows.length : data.count;
+				setText("#subtitle", "Destinos disponibles: " + count + " | NPC " + text(context.npc_class || "-"));
+				renderList();
+				renderDetail();
+			}
+
+			globalThis.htmluiReceive = function (eventName, payload) {
+				if (eventName === "sfui:open") {
+					if (payload && payload.windowId) state.windowId = payload.windowId;
+					return true;
+				}
+
+				if (eventName === "sfui:config") {
+					if (payload && payload.windowId) state.windowId = payload.windowId;
+					state.events = payload && payload.events ? payload.events : state.events;
+					return true;
+				}
+
+				if (eventName === "sfui:message") {
+					if (payload && payload.windowId && payload.windowId !== state.windowId) return false;
+					if (payload && payload.action === "setData") {
+						applyData(payload.payload || {});
+						return true;
+					}
+					return false;
+				}
+
+				if (eventName === "sfui:close") return true;
+				return false;
+			};
+
+			function bindStaticEvents() {
+				var move = query("#btn-move");
+				if (move) {
+					bindEvent(move, "click", function () {
+						var row = selectedRow();
+						emit(actionFor("#btn-move", "click", "NpcMove.Confirm"), {
+							windowId: state.windowId,
+							row: state.selectedIndex,
+							id: row ? row.id : null
+						});
+					});
+				}
+
+				var refresh = query("#btn-refresh");
+				if (refresh) {
+					bindEvent(refresh, "click", function () {
+						emit(actionFor("#btn-refresh", "click", "NpcMove.Refresh"), { windowId: state.windowId });
+					});
+				}
+
+				var close = query("#btn-close");
+				if (close) {
+					bindEvent(close, "click", function () {
+						emit(actionFor("#btn-close", "click", "NpcMove.Close"), { windowId: state.windowId });
+					});
+				}
+			}
+
+			bindStaticEvents();
+			setTimeout(function () {
+				emit("NpcMove.Ready", { windowId: state.windowId });
+			}, 1);
+		})();
+	</script>
+</body>
+</html>

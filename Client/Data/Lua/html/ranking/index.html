@@ -1,0 +1,632 @@
+<!doctype html>
+<html>
+<head>
+	<meta charset="utf-8">
+	<title>Ranking</title>
+	<style>
+		html, body {
+			margin: 0;
+			width: 100%;
+			height: 100%;
+			background: transparent;
+			color: #f3f6ff;
+			font-family: Arial, Helvetica, sans-serif;
+			overflow: hidden;
+		}
+
+		.shell {
+			position: absolute;
+			left: 0;
+			top: 0;
+			right: 0;
+			bottom: 0;
+			background: rgba(0, 0, 0, 0.24);
+		}
+
+		.title {
+			height: 68px;
+			line-height: 68px;
+			text-align: center;
+			font-family: Georgia, "Times New Roman", serif;
+			font-size: 33px;
+			font-weight: 700;
+			color: #ffffff;
+			text-transform: uppercase;
+			text-shadow: 0 2px 10px rgba(0, 0, 0, 0.9);
+		}
+
+		.board {
+			position: absolute;
+			left: 0;
+			right: 0;
+			top: 68px;
+			bottom: 0;
+			display: flex;
+			gap: 18px;
+			padding: 0 0 0 0;
+			box-sizing: border-box;
+		}
+
+		.side {
+			width: 230px;
+			height: 100%;
+			background: rgba(7, 10, 15, 0.82);
+			border: 1px solid rgba(220, 190, 95, 0.18);
+			box-sizing: border-box;
+		}
+
+		.heading {
+			padding: 18px 18px 8px;
+			font-size: 14px;
+			font-weight: 700;
+			color: #d9c47b;
+			text-transform: uppercase;
+		}
+
+		.season {
+			margin: 8px 14px 18px;
+			padding: 14px;
+			background: rgba(255, 255, 255, 0.045);
+			border: 1px solid rgba(255, 255, 255, 0.07);
+		}
+
+		.season-name {
+			font-size: 18px;
+			font-weight: 700;
+			color: #ffffff;
+		}
+
+		.season-summary {
+			margin-top: 5px;
+			font-size: 12px;
+			color: #8fa0b8;
+			line-height: 1.35;
+		}
+
+		.tabs {
+			padding: 0 14px;
+		}
+
+		.tab {
+			height: 38px;
+			line-height: 38px;
+			margin-bottom: 8px;
+			padding: 0 12px;
+			background: rgba(255, 255, 255, 0.035);
+			color: #b8c2d4;
+			font-size: 13px;
+		}
+
+		.tab:hover {
+			background: rgba(255, 255, 255, 0.08);
+			color: #ffffff;
+		}
+
+		.tab.active {
+			background: linear-gradient(to right, rgba(91, 210, 0, 0.72), rgba(91, 210, 0, 0.18));
+			color: #ffffff;
+			font-weight: 700;
+		}
+
+		.reward {
+			margin: 22px 14px 0;
+			padding: 13px;
+			background: rgba(25, 36, 45, 0.74);
+			border: 1px solid rgba(67, 200, 230, 0.2);
+		}
+
+		.reward-title {
+			font-size: 13px;
+			font-weight: 700;
+			color: #56d9ff;
+		}
+
+		.reward-text {
+			margin-top: 7px;
+			font-size: 12px;
+			line-height: 1.35;
+			color: #b7c4d4;
+		}
+
+		.main {
+			position: relative;
+			flex: 1;
+			height: 100%;
+			background: rgba(5, 8, 13, 0.76);
+			border: 1px solid rgba(255, 255, 255, 0.08);
+			box-sizing: border-box;
+			min-width: 0;
+		}
+
+		.topbar {
+			height: 38px;
+			display: flex;
+			align-items: center;
+			justify-content: flex-end;
+			padding: 0 24px;
+			box-sizing: border-box;
+		}
+
+		.refresh {
+			height: 25px;
+			padding: 0 12px;
+			border: 1px solid rgba(131, 255, 0, 0.22);
+			background: rgba(255, 255, 255, 0.05);
+			color: #83ff00;
+			font-size: 12px;
+			font-weight: 700;
+			line-height: 24px;
+		}
+
+		.refresh:hover {
+			background: rgba(131, 255, 0, 0.14);
+		}
+
+		.podium {
+			position: relative;
+			z-index: 2;
+			height: 165px;
+			display: flex;
+			align-items: flex-end;
+			justify-content: center;
+			gap: 18px;
+			padding-top: 8px;
+			box-sizing: border-box;
+		}
+
+		.champion {
+			width: 190px;
+			height: 132px;
+			background: rgba(11, 17, 24, 0.88);
+			border: 1px solid rgba(255, 255, 255, 0.08);
+			box-sizing: border-box;
+			text-align: center;
+		}
+
+		.native-preview {
+			position: absolute;
+			left: 70px;
+			top: 28px;
+			width: 112px;
+			height: 150px;
+			border: 1px solid rgba(255, 215, 92, 0.20);
+			background: rgba(0, 0, 0, 0.10);
+			box-shadow: inset 0 0 32px rgba(0, 0, 0, 0.55);
+			z-index: 1;
+		}
+
+		.native-preview-label {
+			position: absolute;
+			left: 0;
+			right: 0;
+			bottom: 5px;
+			text-align: center;
+			font-size: 10px;
+			color: rgba(216, 199, 135, 0.72);
+			text-transform: uppercase;
+		}
+
+		.champion.first {
+			width: 230px;
+			height: 158px;
+			border-color: rgba(255, 215, 92, 0.48);
+			background: rgba(20, 17, 10, 0.88);
+		}
+
+		.medal {
+			width: 42px;
+			height: 42px;
+			margin: -16px auto 0;
+			border-radius: 50%;
+			line-height: 42px;
+			font-size: 18px;
+			font-weight: 800;
+			color: #171717;
+			background: linear-gradient(#fff2a9, #c79528);
+		}
+
+		.second .medal {
+			background: linear-gradient(#eef4ff, #9aa9bd);
+		}
+
+		.third .medal {
+			background: linear-gradient(#ffc38f, #a85b25);
+		}
+
+		.champ-name {
+			margin-top: 14px;
+			font-size: 18px;
+			font-weight: 700;
+			color: #ffffff;
+		}
+
+		.first .champ-name {
+			font-size: 23px;
+		}
+
+		.champ-meta {
+			margin-top: 5px;
+			font-size: 12px;
+			color: #9ca8ba;
+		}
+
+		.champ-score {
+			margin-top: 12px;
+			font-size: 20px;
+			font-weight: 800;
+			color: #83ff00;
+		}
+
+		.first .champ-score {
+			font-size: 26px;
+		}
+
+		.table-wrap {
+			margin: 12px 24px 0;
+			height: 296px;
+			overflow-y: auto;
+			background: rgba(0, 0, 0, 0.08);
+		}
+
+		.table-head,
+		.row {
+			display: grid;
+			grid-template-columns: 70px 1fr 135px 90px 120px;
+			align-items: center;
+			min-height: 38px;
+		}
+
+		.table-head {
+			background: rgba(255, 255, 255, 0.055);
+			color: #d8c787;
+			font-size: 12px;
+			font-weight: 700;
+			text-transform: uppercase;
+		}
+
+		.row {
+			background: rgba(255, 255, 255, 0.028);
+			color: #d9e0ec;
+			font-size: 13px;
+			border-bottom: 1px solid rgba(255, 255, 255, 0.045);
+		}
+
+		.row:nth-child(even) {
+			background: rgba(255, 255, 255, 0.04);
+		}
+
+		.row:hover {
+			background: rgba(91, 210, 0, 0.12);
+		}
+
+		.cell {
+			padding: 0 10px;
+			overflow: hidden;
+			white-space: nowrap;
+			text-overflow: ellipsis;
+		}
+
+		.rank {
+			text-align: center;
+			color: #f0d370;
+			font-weight: 700;
+		}
+
+		.name {
+			color: #ffffff;
+			font-weight: 700;
+		}
+
+		.score {
+			text-align: right;
+			color: #83ff00;
+			font-weight: 800;
+			padding-right: 18px;
+		}
+
+		.footer {
+			margin: 14px 24px 0;
+			height: 40px;
+			display: flex;
+			align-items: center;
+			color: #99a8bd;
+			font-size: 12px;
+		}
+
+		.pill {
+			padding: 7px 11px;
+			background: rgba(255, 255, 255, 0.05);
+			border: 1px solid rgba(255, 255, 255, 0.06);
+			color: #d5dde9;
+		}
+
+		.pill.primary {
+			color: #83ff00;
+			border-color: rgba(131, 255, 0, 0.2);
+		}
+
+		.spacer {
+			flex: 1;
+		}
+	</style>
+</head>
+<body>
+	<section class="shell" id="ranking-root">
+		<header class="title" id="ranking-title">RANKING</header>
+		<div class="board">
+			<aside class="side">
+				<div class="heading">Temporada</div>
+				<div class="season">
+					<div class="season-name" id="season-name">Ranking</div>
+					<div class="season-summary" id="season-summary">Esperando datos Lua...</div>
+				</div>
+
+				<div class="heading">Categorias</div>
+				<div class="tabs" id="ranking-tabs"></div>
+
+				<div class="reward">
+					<div class="reward-title">Premio Top 3</div>
+					<div class="reward-text">WCoinC, titulo temporal y aura visual de temporada para los mejores lugares.</div>
+				</div>
+			</aside>
+
+			<main class="main">
+				<div class="topbar">
+					<div class="refresh" id="btn-refresh">REFRESH</div>
+				</div>
+				<div class="native-preview" id="ranking-native-preview" data-render-slot="preview">
+					<div class="native-preview-label">Preview</div>
+				</div>
+				<div class="podium" id="ranking-podium"></div>
+				<div class="table-wrap">
+					<div class="table" id="ranking-table"></div>
+				</div>
+				<div class="footer">
+					<div class="pill primary" id="status-main">Esperando binding Lua</div>
+					<div class="spacer"></div>
+					<div class="pill" id="status-sub">sin datos</div>
+				</div>
+			</main>
+		</div>
+	</section>
+
+	<script>
+		(function () {
+			var tabLabels = ["General", "Reset Master", "Blood Castle", "Chaos Castle", "Guild War", "Eventos"];
+			var state = {
+				windowId: "html_ranking",
+				rows: [],
+				currentTab: 0,
+				maxTabs: 1,
+				events: {},
+				scoreColumn: "Score"
+			};
+
+			function query(selector) {
+				if (document.$) return document.$(selector);
+				return document.querySelector(selector);
+			}
+
+			function bindEvent(element, type, handler) {
+				if (!element) return;
+				if (element.on) element.on(type, handler);
+				else element.addEventListener(type, handler);
+			}
+
+			function text(value) {
+				return value === undefined || value === null ? "" : String(value);
+			}
+
+			function setText(selector, value) {
+				var element = query(selector);
+				if (element) element.textContent = text(value);
+			}
+
+			function escapeHtml(value) {
+				return text(value)
+					.replace(/&/g, "&amp;")
+					.replace(/</g, "&lt;")
+					.replace(/>/g, "&gt;")
+					.replace(/"/g, "&quot;");
+			}
+
+			function number(value) {
+				return text(value === undefined || value === null ? 0 : value).replace(/\B(?=(\d{3})+(?!\d))/g, ",");
+			}
+
+			function actionFor(selector, type, fallback) {
+				var key = selector + ":" + type;
+				return state.events && state.events[key] ? state.events[key] : fallback;
+			}
+
+			function emit(eventName, payload) {
+				if (!globalThis.htmluiRequest || !eventName) return false;
+				return !!globalThis.htmluiRequest(eventName, payload || {});
+			}
+
+			function normalizeRow(row, index) {
+				row = row || {};
+				return {
+					index: index,
+					position: row.position || index + 1,
+					name: row.name || "Esperando",
+					className: row.class_name || row.className || row["class"] || "-",
+					vip: row.vip || 0,
+					score: row.score || 0
+				};
+			}
+
+			function scheduleSyncBurst() {
+				setTimeout(function () { emit("Ranking.Sync", { windowId: state.windowId }); }, 250);
+				setTimeout(function () { emit("Ranking.Sync", { windowId: state.windowId }); }, 800);
+				setTimeout(function () { emit("Ranking.Sync", { windowId: state.windowId }); }, 1600);
+			}
+
+			function renderTabs() {
+				var tabs = query("#ranking-tabs");
+				if (!tabs) return;
+
+				var maxTabs = Math.max(Number(state.maxTabs || 1), 1);
+				var html = "";
+				for (var i = 0; i < maxTabs; i++) {
+					var label = tabLabels[i] || ("Ranking " + (i + 1));
+					html += '<div class="tab' + (i === Number(state.currentTab) ? ' active' : '') + '" id="ranking-tab-' + i + '">' + escapeHtml(label) + '</div>';
+				}
+				tabs.innerHTML = html;
+
+				for (var index = 0; index < maxTabs; index++) {
+					(function (tab) {
+						bindEvent(query("#ranking-tab-" + tab), "click", function () {
+							state.currentTab = tab;
+							renderTabs();
+							setText("#status-main", "Solicitando " + (tabLabels[tab] || ("Ranking " + (tab + 1))));
+							emit(actionFor("#ranking-tabs", "click", "Ranking.Tab"), {
+								windowId: state.windowId,
+								tab: tab
+							});
+							scheduleSyncBurst();
+						});
+					})(index);
+				}
+			}
+
+			function championHtml(row, cssClass) {
+				row = row ? normalizeRow(row, row.index || 0) : null;
+				var position = row ? row.position : "-";
+				var name = row ? row.name : "Esperando";
+				var meta = row ? row.className + (Number(row.vip || 0) > 0 ? " / VIP " + row.vip : "") : "Sin datos";
+				var score = row ? number(row.score) : "0";
+
+				return '<div class="champion ' + cssClass + '">' +
+					'<div class="medal">' + escapeHtml(position) + '</div>' +
+					'<div class="champ-name">' + escapeHtml(name) + '</div>' +
+					'<div class="champ-meta">' + escapeHtml(meta) + '</div>' +
+					'<div class="champ-score">' + escapeHtml(score) + '</div>' +
+					'</div>';
+			}
+
+			function renderPodium() {
+				var podium = query("#ranking-podium");
+				if (!podium) return;
+				podium.innerHTML =
+					championHtml(state.rows[1], "second") +
+					championHtml(state.rows[0], "first") +
+					championHtml(state.rows[2], "third");
+			}
+
+			function renderTable() {
+				var table = query("#ranking-table");
+				if (!table) return;
+
+				var html = '<div class="table-head">' +
+					'<div class="cell rank">Rank</div>' +
+					'<div class="cell">Personaje</div>' +
+					'<div class="cell">Clase</div>' +
+					'<div class="cell">VIP</div>' +
+					'<div class="cell score">' + escapeHtml(state.scoreColumn || "Score") + '</div>' +
+					'</div>';
+
+				if (!state.rows || state.rows.length === 0) {
+					html += '<div class="row">' +
+						'<div class="cell rank">--</div>' +
+						'<div class="cell name">Sin entradas recibidas</div>' +
+						'<div class="cell">--</div>' +
+						'<div class="cell">--</div>' +
+						'<div class="cell score">0</div>' +
+						'</div>';
+				}
+				else {
+					for (var i = 0; i < state.rows.length; i++) {
+						var row = normalizeRow(state.rows[i], i);
+						html += '<div class="row" id="ranking-row-' + i + '">' +
+							'<div class="cell rank">' + escapeHtml(row.position) + '</div>' +
+							'<div class="cell name">' + escapeHtml(row.name) + '</div>' +
+							'<div class="cell">' + escapeHtml(row.className) + '</div>' +
+							'<div class="cell">' + escapeHtml(Number(row.vip || 0) > 0 ? "VIP " + row.vip : "-") + '</div>' +
+							'<div class="cell score">' + escapeHtml(number(row.score)) + '</div>' +
+							'</div>';
+					}
+				}
+
+				table.innerHTML = html;
+
+				for (var index = 0; index < state.rows.length; index++) {
+					(function (rowIndex) {
+						bindEvent(query("#ranking-row-" + rowIndex), "click", function () {
+							emit(actionFor("#ranking-table", "click", "Ranking.Select"), {
+								windowId: state.windowId,
+								row: rowIndex,
+								index: rowIndex
+							});
+						});
+					})(index);
+				}
+			}
+
+			function applyData(data) {
+				data = data || {};
+				var table = data.table || {};
+				state.rows = data.rows || table.rows || [];
+				state.currentTab = Number(data.current_tab === undefined ? table.current_tab || 0 : data.current_tab);
+				state.maxTabs = Number(data.max_tabs === undefined ? table.max_tabs || 1 : data.max_tabs);
+				state.scoreColumn = data.score_column || "Score";
+
+				var title = data.title || "Rankings";
+				setText("#ranking-title", title);
+				setText("#season-name", title);
+				setText("#season-summary", data.summary || ("Entradas cargadas: " + state.rows.length));
+				setText("#status-main", data.reason ? ("Binding: " + data.reason) : "Binding activo");
+				setText("#status-sub", "Tab " + (state.currentTab + 1) + " / " + Math.max(state.maxTabs, 1) + " | " + state.rows.length + " filas");
+
+				renderTabs();
+				renderPodium();
+				renderTable();
+			}
+
+			globalThis.htmluiReceive = function (eventName, payload) {
+				if (eventName === "sfui:open") {
+					if (payload && payload.windowId) state.windowId = payload.windowId;
+					return true;
+				}
+
+				if (eventName === "sfui:config") {
+					if (payload && payload.windowId) state.windowId = payload.windowId;
+					state.events = payload && payload.events ? payload.events : state.events;
+					return true;
+				}
+
+				if (eventName === "sfui:message") {
+					if (payload && payload.windowId && payload.windowId !== state.windowId) return false;
+					if (payload && payload.action === "setData") {
+						applyData(payload.payload || {});
+						return true;
+					}
+					return false;
+				}
+
+				return false;
+			};
+
+			bindEvent(query("#btn-refresh"), "click", function () {
+				setText("#status-main", "Solicitando refresh");
+				emit(actionFor("#btn-refresh", "click", "Ranking.Refresh"), { windowId: state.windowId });
+				scheduleSyncBurst();
+			});
+
+			applyData({
+				title: "Rankings",
+				summary: "Esperando datos Lua...",
+				rows: [],
+				current_tab: 0,
+				max_tabs: 1,
+				reason: "boot"
+			});
+
+			setTimeout(function () {
+				emit("Ranking.Ready", { windowId: state.windowId });
+				scheduleSyncBurst();
+			}, 1);
+		})();
+	</script>
+</body>
+</html>
