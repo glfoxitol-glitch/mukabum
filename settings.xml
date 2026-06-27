@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<client>
+    <version>0.0.0</version>
+    <user>glfoxitol-glitch</user>
+    <repositories>mukabum</repositories>
+
+    <launcher>
+		<app_name>Main.exe</app_name>
+        <base_url>http://127.0.0.1/</base_url>
+        <max_instances>5</max_instances>
+        <title>MU Online Launcher</title>
+    </launcher>
+</client>
